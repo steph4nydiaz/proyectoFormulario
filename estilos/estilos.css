@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Freeman&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Lemon&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--fondo, #ffeef6);
+    padding: 20px;
+}
+
+h1 {
+    font-family: Freeman;
+    font-size: 40px;
+    text-align: center;
+    color: #d73e52;
+    
+}
+
+form {
+    width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    color: #d73e52;
+    font-family: IBM Plex Sans;
+    box-shadow: 0 5px 20px #3c1a1a26;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    width: 130px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input {
+    padding: 5px;
+    width: 180px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 10px 20px;
+    background-color: #d73e52;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: IBM Plex Sans;
+    font-weight: bold;
+}
