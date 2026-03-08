@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Proyecto Formulario</title>
+    <link rel="stylesheet" href="estilos/estilos.css">
+
+</head>
+
+<body>
+
+    <h1>Formulario de creación de cuenta</h1>
+
+    <!--Inicio del formulario-->
+    <form id="formulario">
+
+        <p><label for="name">Nombre*:</label><input type="text" id="name" name="nombre" required></p>
+        <p><label for="firstSurname">Apellido 1*:</label> <input type="text" id="firstSurname" name="apellido1" required>
+        </p>
+        <p><label for="secondSurname">Apellido 2:</label> <input type="text" name="apellido2" id="secondSurname"></p>
+        <p><label for="dateBirth">Fecha de nacimiento*:</label> <input type="date" name="fechaNacimiento" id="dateBirth"
+                required></p>
+        <p><label for="email">Correo electrónico*:</label> <input type="email" name="email" id="email" required></p>
+        <p><label for="password1">Contraseña*:</label> <input type="password" name="password1" id="password1" required>
+        </p>
+        <p><label for="password2">Repetir Contraseña*:</label> <input type="password" name="password2" id="password2"
+                required></p>
+
+        <button type="button" onclick="validar()">Crear cuenta</button>
+    </form>
+
+    <script>
+
+        //Función principal que se encarga de almacenar las demás funciones de validación, además de permitir crear la cuenta.
+        function validar() {
+            if (!validarCampos()) return;
+            if (!validarContraseñas()) return;
+            if (!validarEmail()) return;
+            if (!validarFechaNacimiento()) return;
+
+            //Una vez el formulario cumpla con lo requerido, el sistema avisará al usuario que su cuenta fue creada
+            //Más, el fondo cambiará de color (y también agregué para que cambiara el color del h1, así hay un contraste de colores :) )
+            let nombre = document.getElementById("name").value;
+            let apellido1 = document.getElementById("firstSurname").value;
+            alert("Se ha creado correctamente la cuenta de " + nombre + " " + apellido1);
+            document.body.style.setProperty("--fondo", "#9ea9c3");
+            document.querySelector("h1").style.color = "white";
+            
+
+
+        }
+
+        //Función para validar los campos del formulario. 
+        function validarCampos() {
+
+            let nombre = document.getElementById("name").value;
+            let apellido1 = document.getElementById("firstSurname").value;
+            let apellido2 = document.getElementById("secondSurname").value;
+            let fechaNacimiento = document.getElementById("dateBirth").value;
+            let email = document.getElementById("email").value;
+            let password1 = document.getElementById("password1").value;
+            let password2 = document.getElementById("password2").value;
+
+            //Ningún campo puede quedar vacío
+            if (nombre === "" || apellido1 === "" || fechaNacimiento === "" || email === "" || password1 === "" || password2 === "") {
+                alert("Debes rellenar los campos obligatorios")
+                return false;
+            }
+            return true;
+        }
+
+        //Función para validar el email que introduzca el usuario
+        function validarEmail() {
+            let email = document.getElementById("email").value;
+
+            let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regexEmail.test(email)) {
+               alert("Por favor, introduce un correo válido.")
+                return false;
+            }
+            return true;
+        }
+
+        //Función para validar las contraseñas. 
+        function validarContraseñas() {
+
+            let password1 = document.getElementById("password1").value;
+            let password2 = document.getElementById("password2").value;
+
+            //La contraseña debe ser mayor que 8 caracteres
+            if (password1.length < 8) {
+                alert("La contraseña debe tener al menos 8 caracteres");
+                return false;
+            }
+
+            //Las dos contraseñas deben coincidir
+            if (password1 != password2) {
+                alert("Las contraseñas deben de coincidir");
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+
+        //Función para validar la edad del usuario.
+        function validarFechaNacimiento() {
+            let fechaNacimiento = document.getElementById("dateBirth").value;
+
+
+            let fecha = new Date(fechaNacimiento);
+            let hoy = new Date();
+
+            //La fecha que introduce el usuario no debe ser mayor a la fecha actual
+            if (fecha > hoy) {
+                alert("La fecha de nacimiento no puede ser futura");
+                return false;
+            }
+
+            let edad = hoy.getFullYear() - fecha.getFullYear();
+            let mes = hoy.getMonth() - fecha.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fecha.getDate())) {
+                edad--;
+            }
+
+            //El usuario debe ser mayor de edad
+            if (edad < 18) {
+                alert("Debes ser mayor de edad para crear una cuenta");
+                return false;
+            }
+
+            return true;
+        }
+
+
+    </script>
+</body>
+
+</html>
